@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SBA 316 - Goal Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1 id="appTitle">Goal Tracker</h1>
+      <p id="todayText"></p>
+    </header>
+
+    <section class="card">
+      <h2>Add a goal</h2>
+
+      <!-- HTML validation -->
+      <form id="goalForm">
+        <label for="goalInput">Goal</label>
+        <input
+          id="goalInput"
+          name="goalInput"
+          type="text"
+          placeholder="e.g., Practice JavaScript for 30 minutes"
+          required
+          minlength="3"
+          maxlength="80"
+        />
+        <button id="addBtn" type="submit">Add Goal</button>
+      </form>
+
+      <p id="errorText" class="error"></p>
+    </section>
+
+    <section class="card">
+      <div class="listHeader">
+        <h2>Your goals</h2>
+        <button id="clearBtn" type="button">Clear All</button>
+      </div>
+
+      <p id="emptyState">No goals yet. Add your first goal above.</p>
+      <ul id="goalList" class="goalList"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

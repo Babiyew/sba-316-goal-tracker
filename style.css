@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f7fb;
+}
+
+.container {
+  max-width: 720px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e7e7ef;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin: 10px 0 6px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cfd3dc;
+  border-radius: 8px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#addBtn {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+}
+
+#clearBtn {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.error {
+  color: #b00020;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+.goalList {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.goalItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ececf4;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.goalItem.completed {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.goalText.completedText {
+  text-decoration: line-through;
+}
