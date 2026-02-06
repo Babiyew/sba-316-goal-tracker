@@ -1,6 +1,7 @@
-// SBA 316 - Goal Tracker (DOM + BOM)
+// SBA 316: The Document Object Model (DOM) — Goal Tracker
+// Demonstrates DOM + BOM methods, event listeners, validation, and templating.
 
-// ---------- Cache elements (Requirement: getElementById + querySelector) ----------
+// ---------- Cache elements (getElementById + querySelector) ----------
 const todayText = document.getElementById("todayText");
 const goalForm = document.getElementById("goalForm");
 const goalInput = document.getElementById("goalInput");
@@ -13,7 +14,7 @@ const emptyState = document.querySelector("#emptyState");
 // ---------- BOM usage #1: Date ----------
 todayText.textContent = `Today: ${new Date().toLocaleDateString()}`;
 
-// ---------- Template (Requirement: cloneNode templating) ----------
+// ---------- Template + cloneNode (templating requirement) ----------
 const template = document.createElement("template");
 template.innerHTML = `
   <li class="goalItem">
@@ -22,28 +23,25 @@ template.innerHTML = `
   </li>
 `;
 
-// ---------- Helper ----------
+// ---------- Helper: show/hide empty message ----------
 function updateEmptyState() {
   emptyState.style.display = goalList.children.length === 0 ? "block" : "none";
 }
 
-// ---------- DOM event-based validation (Requirement) ----------
+// ---------- JS validation (in addition to HTML required/minlength/maxlength) ----------
 function validateGoal(value) {
   const trimmed = value.trim();
-
   if (trimmed.length === 0) return "Please type a goal before submitting.";
   if (trimmed.length < 3) return "Goal must be at least 3 characters.";
   if (trimmed.length > 80) return "Goal must be 80 characters or less.";
-
   return "";
 }
 
-// ---------- Event Listener #1 (Requirement): submit ----------
+// ---------- Event listener #1: submit ----------
 goalForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const message = validateGoal(goalInput.value);
-
   if (message) {
     errorText.textContent = message;
 
@@ -54,57 +52,56 @@ goalForm.addEventListener("submit", (event) => {
 
   errorText.textContent = "";
 
-  // Requirement: createElement / templating / cloneNode
+  // Create a new goal item using template + cloneNode
   const li = template.content.firstElementChild.cloneNode(true);
 
-  // Requirement: modify text content (textContent)
+  // Modify text content
   const textSpan = li.querySelector(".goalText");
   textSpan.textContent = goalInput.value.trim();
 
-  // Requirement: appendChild (add to DOM)
+  // Append to the DOM
   goalList.appendChild(li);
 
-  // Requirement: modify attribute (placeholder) in response to interaction
+  // Modify attribute based on interaction
   goalInput.value = "";
   goalInput.setAttribute("placeholder", "Add another goal...");
 
   updateEmptyState();
 });
 
-// ---------- Event Listener #2 (Requirement): click (event delegation) ----------
+// ---------- Event listener #2: click (event delegation) ----------
 goalList.addEventListener("click", (event) => {
   const target = event.target;
 
-  // Requirement: iterate over a collection (forEach)
+  // Iterate over collection (querySelectorAll + forEach)
   const allItems = goalList.querySelectorAll(".goalItem");
   allItems.forEach((item) => item.classList.remove("selected"));
 
   if (target.classList.contains("toggleBtn")) {
-    // Requirement: parent-child navigation (parentNode, firstElementChild)
-    const li = target.parentNode;
-    const textSpan = li.firstElementChild;
+    // Parent-child navigation
+    const li = target.parentNode;           // button -> parent <li>
+    const textSpan = li.firstElementChild;  // <li> -> first child <span>
 
-    // Requirement: modify CSS class in response to interaction
+    // Modify classes / styles
     li.classList.toggle("completed");
     textSpan.classList.toggle("completedText");
 
-    // Requirement: modify text in response to interaction
+    // Modify text content
     target.textContent = li.classList.contains("completed") ? "Undo" : "Done";
   }
 });
 
-// ---------- Clear All button ----------
+// ---------- Clear All ----------
 clearBtn.addEventListener("click", () => {
-  // Remove all goals
   goalList.innerHTML = "";
   updateEmptyState();
 
-  // Modify attribute in response to interaction
+  // Modify attribute based on interaction
   clearBtn.setAttribute("disabled", "true");
 
-  // BOM (optional extra): setTimeout
+  // BOM extra: setTimeout
   setTimeout(() => clearBtn.removeAttribute("disabled"), 1000);
 });
 
-// Initial
+// Initial state
 updateEmptyState();

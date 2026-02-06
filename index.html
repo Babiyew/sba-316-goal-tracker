@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SBA 316 - Goal Tracker</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>SBA 316: The Document Object Model (DOM) — Goal Tracker</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <main class="container">
@@ -16,8 +16,8 @@
     <section class="card">
       <h2>Add a goal</h2>
 
-      <!-- HTML validation -->
-      <form id="goalForm">
+      <!-- HTML validation (required/minlength/maxlength) + JS validation in script.js -->
+      <form id="goalForm" novalidate>
         <label for="goalInput">Goal</label>
         <input
           id="goalInput"
@@ -27,11 +27,12 @@
           required
           minlength="3"
           maxlength="80"
+          autocomplete="off"
         />
         <button id="addBtn" type="submit">Add Goal</button>
       </form>
 
-      <p id="errorText" class="error"></p>
+      <p id="errorText" class="error" aria-live="polite"></p>
     </section>
 
     <section class="card">
@@ -45,6 +46,6 @@
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
